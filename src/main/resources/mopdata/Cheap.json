@@ -1,0 +1,114 @@
+[
+	{
+		"id": 2820664405106505728,
+		"departure": "Florentino Ameghino",
+		"arrival": "Jeppener",
+		"departureTime": 1545794184685,
+		"arrivalTime": 1545795956313
+	},
+	{
+		"id": 3911491854382224384,
+		"departure": "Bordenave",
+		"arrival": "General San Martin",
+		"departureTime": 1545797965647,
+		"arrivalTime": 1545802474538
+	},
+	{
+		"id": 4102625970953128960,
+		"departure": "Rio Grande",
+		"arrival": "Hilario",
+		"departureTime": 1545797591990,
+		"arrivalTime": 1545806149905
+	},
+	{
+		"id": 27333539624279040,
+		"departure": "Huinca Renanco",
+		"arrival": "Banfield",
+		"departureTime": 1545789518703,
+		"arrivalTime": 1545790808318
+	},
+	{
+		"id": 6961614487711176704,
+		"departure": "Presidente Derqui",
+		"arrival": "Platanos",
+		"departureTime": 1545789779099,
+		"arrivalTime": 1545796242402
+	},
+	{
+		"id": 2743460164411913216,
+		"departure": "General Roca",
+		"arrival": "Villa Aberastain",
+		"departureTime": 1545798708271,
+		"arrivalTime": 1545808271431
+	},
+	{
+		"id": 3854614931593453568,
+		"departure": "Castelar",
+		"arrival": "Larroque",
+		"departureTime": 1545793132383,
+		"arrivalTime": 1545801945015
+	},
+	{
+		"id": 6288661834961540096,
+		"departure": "Villa Mercedes",
+		"arrival": "Las Flores",
+		"departureTime": 1545797193517,
+		"arrivalTime": 1545797569971
+	},
+	{
+		"id": 1435999621923854336,
+		"departure": "Concepcion",
+		"arrival": "Allen",
+		"departureTime": 1545793458358,
+		"arrivalTime": 1545803131035
+	},
+	{
+		"id": 5712267514806542336,
+		"departure": "Laferrere",
+		"arrival": "Magdalena",
+		"departureTime": 1545799249962,
+		"arrivalTime": 1545802200327
+	},
+	{
+		"id": 8942823637071681536,
+		"departure": "Villa Gesell",
+		"arrival": "Los Antiguos",
+		"departureTime": 1545799245402,
+		"arrivalTime": 1545805427975
+	},
+	{
+		"id": 5932238653392840704,
+		"departure": "Ascension",
+		"arrival": "Vicuna Mackenna",
+		"departureTime": 1545794298104,
+		"arrivalTime": 1545798356849
+	},
+	{
+		"id": 7314283344136790016,
+		"departure": "Famailla",
+		"arrival": "Buenos Aires",
+		"departureTime": 1545798172166,
+		"arrivalTime": 1545801628039
+	},
+	{
+		"id": 5914945489352631296,
+		"departure": "Canada de Gomez",
+		"arrival": "Canada Rosquin",
+		"departureTime": 1545798417019,
+		"arrivalTime": 1545799880544
+	},
+	{
+		"id": 8320682203906299904,
+		"departure": "Saladillo",
+		"arrival": "El Hoyo",
+		"departureTime": 1545794964260,
+		"arrivalTime": 1545797678581
+	},
+	{
+		"id": 3851290958473635840,
+		"departure": "Palermo",
+		"arrival": "La Paz",
+		"departureTime": 1545790194521,
+		"arrivalTime": 1545794762953
+	}
+]
