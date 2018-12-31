@@ -8,6 +8,8 @@ import java.io.InputStream;
 import java.util.*;
 import java.util.stream.Collectors;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.bind.Bindable;
@@ -31,6 +33,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 @Service
 public class MopdataService {
 	
+	private final Logger logger = LogManager.getLogger(MopdataService.class);
+	
 	@Value("${mopdata}")
 	private Boolean mopdata ;
 	
@@ -51,6 +55,7 @@ public class MopdataService {
 			return mapper.readValue(inputStream1, typeReference1);
 		} catch (IOException e) {
 			System.out.println(e.getMessage());
+			logger.error(e.getMessage());
 			return null;
 		}
 	}
@@ -74,6 +79,7 @@ public class MopdataService {
 		}
 		catch(Exception e) {
 			System.out.println(e.getMessage());
+			logger.error(e.getMessage());
 			return null ;
 		}
 	}
@@ -87,6 +93,7 @@ public class MopdataService {
 			return mapper.readValue(inputStream2, typeReference2);
 		} catch (IOException e) {
 			System.out.println(e.getMessage());
+			logger.error(e.getMessage());
 			return null;
 		}
 	}
@@ -110,6 +117,7 @@ public class MopdataService {
 		}
 		catch(Exception e) {
 			System.out.println(e.getMessage());
+			logger.error(e.getMessage());
 			return null ;
 		}
 	}

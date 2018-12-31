@@ -3,9 +3,9 @@
  */
 package com.example.controller;
 
-import java.util.*;
-import java.util.stream.Collectors;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -29,6 +29,8 @@ import io.swagger.annotations.ApiOperation;
 @RequestMapping(value = "/flights")
 public class FlightController {
 	
+	private static final Logger logger = LogManager.getLogger(FlightController.class);
+	
 //	private static CheapClass[] cheap = null;
 //	private static BusinessClass[] business = null;
 	
@@ -44,6 +46,8 @@ public class FlightController {
 	@PostMapping(value = "/{type}")
 	@ResponseBody
 	public Page<Flight> getFlights(@PathVariable String type, @RequestBody FlightSearchViewModel search, Pageable pageable) throws Exception {
+		logger.info("Start to request flight list");
+
 		ClassType _type = searchEnum(ClassType.class, type) ;
 		Page<Flight> flights =  service.loadMopdata(_type, search, pageable);
 
