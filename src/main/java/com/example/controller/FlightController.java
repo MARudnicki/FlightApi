@@ -7,6 +7,8 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 //import org.springframework.data.domain.Page;
 //import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
@@ -36,29 +38,14 @@ public class FlightController {
 	@ApiOperation(value="Use to pull the flight list", notes="Support filtering and sorting")
 	@ApiImplicitParams({
         @ApiImplicitParam(name = "type", value = "The class type. values would be one of 'All, Cheap, Business'", required = true, dataType = "String"),
-        @ApiImplicitParam(name = "search", value = "The search criteria", required = false, dataType = "FlightSearchViewModel")
+        @ApiImplicitParam(name = "search", value = "The search criteria", required = false, dataType = "FlightSearchViewModel"),
+        @ApiImplicitParam(name = "pageable", value = "The pagging info", required = false, dataType = "Pageable")
 	})
 	@PostMapping(value = "/{type}")
 	@ResponseBody
-	public List<Flight> getFlights(@PathVariable String type, @RequestBody FlightSearchViewModel search) throws Exception {
+	public Page<Flight> getFlights(@PathVariable String type, @RequestBody FlightSearchViewModel search, Pageable pageable) throws Exception {
 		ClassType _type = searchEnum(ClassType.class, type) ;
-		List<Flight> flights =  service.loadMopdata(_type);
-		
-		if(!search.arrival.isEmpty())
-			flights = flights.stream().filter(f -> f.arrival.equalsIgnoreCase(search.arrival)).collect(Collectors.toList()) ;
-		
-		if(!search.departure.isEmpty())
-			flights = flights.stream().filter(f -> f.arrival.equalsIgnoreCase(search.departure)).collect(Collectors.toList()) ;
-		
-		if(search.departureTime != null && search.arrivalTime != null) {
-			flights = flights.stream().filter( f-> f.departureTime.isAfter(search.departureTime) && f.arrivalTime.isBefore(search.arrivalTime)).collect(Collectors.toList()) ;
-		}
-		else if (search.departureTime != null && search.arrivalTime == null) {
-			flights = flights.stream().filter( f-> f.departureTime.isAfter(search.departureTime)).collect(Collectors.toList()) ;
-		}
-		else if (search.departureTime == null && search.arrivalTime != null) {
-			flights = flights.stream().filter( f-> f.arrivalTime.isBefore(search.arrivalTime)).collect(Collectors.toList()) ;
-		}
+		Page<Flight> flights =  service.loadMopdata(_type, search, pageable);
 
 		return flights ;
 	}

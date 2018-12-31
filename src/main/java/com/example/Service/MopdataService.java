@@ -6,19 +6,21 @@ package com.example.Service;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.*;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.bind.Bindable;
 import org.springframework.boot.context.properties.bind.Binder;
 import org.springframework.core.env.Environment;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import com.example.domain.BusinessClass;
-import com.example.domain.CheapClass;
-import com.example.domain.ClassType;
-import com.example.viewmodel.Flight;
+import com.example.domain.*;
+import com.example.viewmodel.*;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -156,5 +158,47 @@ public class MopdataService {
 		}
 		
 		return flights ;
+	}
+	
+	public Page<Flight> loadMopdata(ClassType type, FlightSearchViewModel search, Pageable pageable) throws Exception {
+		List<Flight> flights = this.loadMopdata(type) ;
+		
+		if(search.departure != null && !search.departure.isEmpty())
+			flights = flights
+						.stream()
+						.filter(f -> f.departure.contains(search.departure))
+						.sorted((l, r) -> l.departure.compareTo(r.departure))
+						.collect(Collectors.toList()) ;
+		
+		if(search.arrival!=null && !search.arrival.isEmpty())
+			flights = flights
+						.stream()
+						.filter(f -> f.arrival.contains(search.arrival))
+						.sorted((l, r) -> l.arrival.compareTo(r.arrival))
+						.collect(Collectors.toList()) ;
+		
+		if(search.departureTime != null)
+			flights = flights
+						.stream()
+						.filter(f -> f.departureTime.compareTo(search.departureTime) >= 0)
+						.sorted((l,r) -> l.departureTime.compareTo(r.departureTime))
+						.collect(Collectors.toList()) ;
+		
+		if(search.arrivalTime != null)
+			flights = flights
+						.stream()
+						.filter(f -> f.arrivalTime.compareTo(search.arrivalTime) <= 0)
+						.sorted((l,r) -> l.arrivalTime.compareTo(r.arrivalTime))
+						.collect(Collectors.toList()) ;
+		
+		int start = (int) pageable.getOffset();
+	    int end = (start + pageable.getPageSize()) > flights.size() ? flights.size() : (start + pageable.getPageSize());
+	    
+	    Page<Flight> pages = new PageImpl<Flight>(flights.subList(start, end), pageable, flights.size());
+		return pages;
+	}
+	
+	static Map<Integer, List<Flight>> partition(List<Flight> list, int pagesize) {
+		return null;
 	}
 }
