@@ -7,9 +7,13 @@ dependencies:
 3. swagger2
 4. jackson
 5. joda-time
+6. Async Logging with Log4j2
 
+DONE:
 
-To do:
-Implement Specification to build dynamic filter
+filter & pagging
+
+To-DO:
+able to create dynamic filter & sorting.
 
 
